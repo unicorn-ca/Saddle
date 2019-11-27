@@ -29,7 +29,7 @@ def check_template(directory, log):
             if log is None: # Run cfn_nag_scan and output it to stdout
                 subprocess.run(["cfn_nag_scan", "--input-path", path])
             else: # Run cfn_nag_scan and output it into logs/
-                print(bcolours.HEADER + path + bcolours.ENDC, end='\t')
+                print(bcolours.HEADER + path + bcolours.ENDC)
                 output = f"{log}/{directory.decode('utf-8')}.{filename}.log"
                 subprocess.run(["cfn_nag_scan", "--input-path", path], stdout=open(output, 'w'))
                 print_output(output)
@@ -39,18 +39,17 @@ def print_output(logfile):
     # Grep for the number of failures
     failures_proc = subprocess.run(["grep", "Failures count:", logfile], stdout=subprocess.PIPE)
     failures = failures_proc.stdout.decode('utf-8').strip('\n')
-    if failures.endswith('0'):
-        print(bcolours.OKGREEN + failures + bcolours.ENDC, end='\t')
-    else:
-        print(bcolours.FAIL + failures + bcolours.ENDC, end='\t')
-
     # Grep for the number of warnings
     warnings_proc = subprocess.run(["grep", "Warnings count:", logfile], stdout=subprocess.PIPE)
     warnings = warnings_proc.stdout.decode('utf-8').strip('\n')
-    if warnings.endswith('0'):
-        print(bcolours.OKGREEN + warnings + bcolours.ENDC)
-    else:
-        print(bcolours.WARNING + warnings + bcolours.ENDC)
+
+    if failures.endswith('0'): # no failures!
+        print('\t\t'+bcolours.OKGREEN + failures + bcolours.ENDC)
+    if warnings.endswith('0'): # no warnings!
+        print('\t\t'+bcolours.OKGREEN + warnings + bcolours.ENDC)
+    # TODO - print "failed" in else case
+    # else:
+    #     print(bcolours.WARNING + warnings + bcolours.ENDC)
 
 # Get the directories with the cfn templates
 parser = argparse.ArgumentParser()

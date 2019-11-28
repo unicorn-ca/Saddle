@@ -65,10 +65,10 @@ if args.logdir is not None and os.path.isdir(args.logdir) is False:
 
 # Check templates
 print("------------------------------------------------------------")
-print(bcolours.OKBLUE + "cfn-checker starting" + bcolours.ENDC)
+print(bcolours.OKBLUE + "Saddle by unicorn-ca: starting" + bcolours.ENDC)
 print("------------------------------------------------------------")
 for directory in args.dir:
     check_template(directory, args.logdir)
 print("------------------------------------------------------------")
-print(bcolours.OKBLUE + "cfn-checker complete" + bcolours.ENDC)
+print(bcolours.OKBLUE + "Saddle by unicorn-ca: complete" + bcolours.ENDC)
 print("------------------------------------------------------------")

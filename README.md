@@ -1,4 +1,7 @@
 # Saddle
+
+![Saddle_Logo](Saddle.png)
+
 ## Description
 The cfn-checker tool uses [cfn-nag](https://github.com/stelligent/cfn_nag) to validate CloudFormation templates.
 
